@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول نظام غذائي وتمارين</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            text-align: right;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+        th {
+            background-color: rgba(255, 204, 0, 0.8);
+            color: #000;
+            font-size: 1.2em;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .total {
+            font-weight: bold;
+            color: #ffcc00;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+        textarea {
+            background-color: #212121;
+            color: #f0f0f0;
+            border: 1px solid #ffcc00;
+            border-radius: 6px;
+            resize: none;
+            font-size: 1em;
+            padding: 5px;
+        }
+        input[type="checkbox"] {
+            transform: scale(1.5);
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Load saved data
+            const checkboxes = document.querySelectorAll("input[type='checkbox']");
+            const textareas = document.querySelectorAll("textarea");
+
+            checkboxes.forEach(checkbox => {
+                const id = checkbox.getAttribute("data-id");
+                const savedValue = localStorage.getItem(id);
+                checkbox.checked = savedValue === "true";
+
+                checkbox.addEventListener("change", () => {
+                    localStorage.setItem(id, checkbox.checked);
+                });
+            });
+
+            textareas.forEach(textarea => {
+                const id = textarea.getAttribute("data-id");
+                const savedValue = localStorage.getItem(id);
+                if (savedValue) textarea.value = savedValue;
+
+                textarea.addEventListener("input", () => {
+                    localStorage.setItem(id, textarea.value);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>المعضل وائل في رحلة التنشيف</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>الوجبة</th>
+                    <th>الوقت</th>
+                    <th>المكونات</th>
+                    <th>السعرات</th>
+                    <th>تم الإنجاز</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>الإفطار</td>
+                    <td>7:30 - 8:00 صباحًا</td>
+                    <td>- 6 بياض بيض + 1 بيضة كاملة<br>- 50 غ شوفان مع ملعقة صغيرة عسل<br>- كوب قهوة/شاي بدون سكر</td>
+                    <td>350-400</td>
+                    <td class="checkbox"><input type="checkbox" data-id="meal1"></td>
+                </tr>
+                <tr>
+                    <td>وجبة خفيفة</td>
+                    <td>10:30 صباحًا</td>
+                    <td>- 1 موزة متوسطة<br>- 20 غ مكسرات (لوز/جوز)</td>
+                    <td>200</td>
+                    <td class="checkbox"><input type="checkbox" data-id="meal2"></td>
+                </tr>
+                <tr>
+                    <td>الغداء (بعد التمرين)</td>
+                    <td>1:00 - 1:30 ظهرًا</td>
+                    <td>- 150-200 غ صدر دجاج مشوي<br>- 1 كوب أرز أو 150 غ بطاطا مشوية<br>- سلطة أو خضروات مشوية</td>
+                    <td>500-550</td>
+                    <td class="checkbox"><input type="checkbox" data-id="meal3"></td>
+                </tr>
+                <tr>
+                    <td>وجبة خفيفة</td>
+                    <td>4:00 عصرًا</td>
+                    <td>- كوب زبادي يوناني (150 غ) + ملعقة صغيرة عسل<br>- 30 غ مكسرات أو لوح بروتين</td>
+                    <td>150-200</td>
+                    <td class="checkbox"><input type="checkbox" data-id="meal4"></td>
+                </tr>
+                <tr>
+                    <td>العشاء</td>
+                    <td>7:30 - 8:00 مساءً</td>
+                    <td>- 150 غ لحم مشوي<br>- كوب خضروات مطهية بالبخار<br>- 1 شريحة خبز أسمر أو نصف كوب كينوا</td>
+                    <td>400-450</td>
+                    <td class="checkbox"><input type="checkbox" data-id="meal5"></td>
+                </tr>
+                <tr>
+                    <td>وجبة خفيفة</td>
+                    <td>9:30 - 10:00 مساءً</td>
+                    <td>- 150 غ جبن قريش أو كوب حليب خالي الدسم<br>- 1 ملعقة صغيرة زبدة فول سوداني</td>
+                    <td>200-250</td>
+                    <td class="checkbox"><input type="checkbox" data-id="meal6"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="total">
+            إجمالي السعرات: حوالي 1800-2050 سعرة حرارية
+        </div>
+
+        <h1>جدول تمرين أرنولد سبليت</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>اليوم</th>
+                    <th>التمارين</th>
+                    <th>الأوزان (كجم)</th>
+                    <th>تم الإنجاز</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>اليوم 1</td>
+                    <td>- الصدر: ضغط بنش ببار، ضغط مائل بالدامبل<br>- الظهر: سحب أمامي، تجديف بالبار</td>
+                    <td><textarea rows="2" cols="20" data-id="weights1"></textarea></td>
+                    <td class="checkbox"><input type="checkbox" data-id="workout1"></td>
+                </tr>
+                <tr>
+                    
+                        <td>اليوم 2</td>
+                        <td>- الكتف: كتف علوي دنبل ، رفرفة جانبية<br>- الذراع: بايسبس كيرل، ترايسبس ديب</td>
+                        <td><textarea rows="2" cols="20"></textarea></td>
+                        <td>
+                            <div class="image-grid">
+                                
+                            </div>
+                        </td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>اليوم 3</td>
+                        <td>- الأرجل: سكوات، ديدلفت<br>- المعدة: كرنش، بلانك</td>
+                        <td><textarea rows="2" cols="20"></textarea></td>
+                        <td>
+                            <div class="image-grid">
+                                
+                            </div>
+                        </td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>اليوم 4</td>
+                        <td>- الصدر: تفتيح دامبل، ضغط صدر بالكابل<br>- الظهر: سحب عالي بالكابل، تجديف بالدامبل</td>
+                        <td><textarea rows="2" cols="20"></textarea></td>
+                        <td>
+                            <div class="image-grid">
+                               
+                            </div>
+                        </td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>اليوم 5</td>
+                        <td>- الكتف: رفرفة أمامية، ضغط خلفي بالبار<br>- الذراع: هامر كيرل، ترايسبس بكابل</td>
+                        <td><textarea rows="2" cols="20"></textarea></td>
+                        <td>
+                            <div class="image-grid">
+                                
+                            </div>
+                        </td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>اليوم 6</td>
+                        <td>- الأرجل: لونجز، بريس الأرجل<br>- المعدة: رفع الأرجل، تويست روسي</td>
+                        <td><textarea rows="2" cols="20"></textarea></td>
+                        <td>
+                            <div class="image-grid">
+                            </div>
+                        </td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>اليوم 7</td>
+                        <td>راحة</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+    
+    </body></html>
